@@ -1,10 +1,10 @@
 import math
 import time
 from getters import *
+from datetime import datetime as dt
 
 
 def fourthLvlScav(driver, choosenTroops, sums):
-    print("4th wtf")
     sendBtns = driver.find_elements_by_xpath("//a[@class ='btn btn-default free_send_button']")
     for troop in choosenTroops:
         val = math.ceil(choosenTroops[troop]/13)
@@ -41,7 +41,6 @@ def fourthLvlScav(driver, choosenTroops, sums):
 
 
 def thirdLvlScav(driver, choosenTroops, sums):
-    print("3rd")
     sendBtns = driver.find_elements_by_xpath("//a[@class ='btn btn-default free_send_button']")
     for troop in choosenTroops:
         val = math.ceil(choosenTroops[troop]/8)
@@ -68,7 +67,6 @@ def thirdLvlScav(driver, choosenTroops, sums):
 
 
 def secondLvlScav(driver, choosenTroops, sums):
-    print("2nd")
     sendBtns = driver.find_elements_by_xpath("//a[@class ='btn btn-default free_send_button']")
     for troop in choosenTroops:
         val = math.ceil(choosenTroops[troop]/3.5)
@@ -94,13 +92,18 @@ def getAvaibScavLevels(driver):
 
 
 def runScav(driver,choosenTroops, sums, level):
-    print(level)
-    if level == 4:
-        fourthLvlScav(driver, choosenTroops, sums)
-    elif level == 3:
-        thirdLvlScav(driver, choosenTroops, sums)
-    elif level == 2:
-        secondLvlScav(driver, choosenTroops, sums)
+    sendBtns = driver.find_elements_by_xpath("//a[@class ='btn btn-default free_send_button']")
+    if len(sendBtns) == level:
+        if level == 4:
+            fourthLvlScav(driver, choosenTroops, sums)
+        elif level == 3:
+            thirdLvlScav(driver, choosenTroops, sums)
+        elif level == 2:
+            secondLvlScav(driver, choosenTroops, sums)
+    else:
+        returnTimes = [dt.strptime(time.text,"%H:%M:%S").strftime("%H:%M:%S") for time in driver.find_elements_by_xpath("//span[@class = 'return-countdown']")]
+        print("Can't send scavenge yet. Troops will return in " + max(returnTimes))
+        
     
 
 def scavenge(driver):
