@@ -1,6 +1,6 @@
 import math
 import time
-from getters import *
+from getters import get_troops
 from datetime import datetime as dt
 
 

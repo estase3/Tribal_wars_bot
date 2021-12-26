@@ -1,19 +1,15 @@
 from selenium import webdriver
-from selenium.webdriver.chrome import service
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
-from scavenging import *
+from scavenging import scavenge
 import time
 
 s = Service("chromedriver.exe")
 opt = Options()
 opt.add_argument(
-    "user-data-dir=D:\\Programowanie\\Python\\selenium\\TribalWarsBot\\tmp_cache"
-)  # Gets cache needed to login automatically
+    "user-data-dir=D:/Python/selenium/TribalWarsBot/Cache"  # Change path in this line
+)
 driver = webdriver.Chrome(service=s, options=opt)
 driver.get("https://www.plemiona.pl/page/play/pl171")
 time.sleep(2)
